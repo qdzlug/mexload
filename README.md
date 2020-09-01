@@ -1,25 +1,22 @@
-# mexload
+# Simple Loadtesting for a MeX Backend
+This is a very simple set of applications designed to demonstrate how to test an API in order to appropriately size the virtual machine hosting the API.
 
-Load Testing API Backend
+In the real world, you will want to do this using your application instead of the node API server that is installed in this process. You probably want to use your own testing for the client side as well, but if not the `vegeta` program used in this demo may fit the bill.
 
-```
-Enter host password for user 'demo':
-{
-  "repo" : "repo-demoorg",
-  "path" : "/apitest.zip",
-  "created" : "2020-08-31T16:30:36.035Z",
-  "createdBy" : "demo",
-  "downloadUri" : "https://artifactory.mobiledgex.net/artifactory/repo-demoorg/apitest.zip",
-  "mimeType" : "application/zip",
-  "size" : "189079",
-  "checksums" : {
-    "sha1" : "b3e627cc838ca58d4eea37bbc51c006c330d6501",
-    "md5" : "b86a0bc726d943865a3c1e35e96a4d19",
-    "sha256" : "1fa30b95f01b420d1122e41737a2d36d3607af85158aba9c1e408ab5252ceb6c"
-  },
-  "originalChecksums" : {
-    "sha256" : "1fa30b95f01b420d1122e41737a2d36d3607af85158aba9c1e408ab5252ceb6c"
-  },
-  "uri" : "https://artifactory.mobiledgex.net/artifactory/repo-demoorg/apitest.zip"
-}%
-```
+# Components
+There are two main components to this test:
+1. An API server.
+2. A Load Generator.
+
+Both are provided as containers; the apiserver is provided as a compose file and the load generator is provided as a buildable docker image.
+
+## API Server
+This is located under the `apiserver` directory and is based off the [jsonplaceholder](https://github.com/typicode/jsonplaceholder) program. 
+
+## Load Generator
+This is located under the `loadgen` directory.
+
+# Usage
+This document assumes some familiarity with the MobiledgeX platform and how to deploy a docker-compose based application with a manifest. If you have questions see the [MobiledgeX Dev Center](https://developers.mobiledgex.com) for details.
+
+Additional information is provided in the subdirectories.
