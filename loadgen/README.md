@@ -1,11 +1,11 @@
 # Load Testing
-This directory contains a very simple load test that can be deployed as a docker container. The `dockerfile` shows the requirements, but at a high level you require the [vegeta](https://github.com/tsenart/vegeta) executable (the provided version is for amd64). 
+This directory contains a very simple load test that can be deployed as a docker container. The `dockerfile` shows the requirements, but at a high level you require the [vegeta](https://github.com/tsenart/vegeta) executable (the provided version is for amd64) and the `jq` json utility.
 
 ## Full Requirements
 - `jq` to handle the processing and creation of the json payload.
 - `vegeta` to run the tests.
-- `env` if you choose to not use the hardcoded values of 30 seconds at 30 connections/second.
-- `run.sh` to serve as the entrypoint.
+- `env` if you choose to not use the hardcoded values of 30 seconds at 30 connections/second or if you choose not to pass the variables in the environment.
+- `run.sh` to serve as the entrypoint for the container.
 
 ## How to Run
 
@@ -70,8 +70,7 @@ Error Set:
 ```
 
 ## Things to Change
-- The `env` file contains two variables, `THERATE` and `THEDURATION`; these can be adjusted to change the duration of the test. Note that affects both POSTS and GETS.
-    - Yes, you can use `-e` or `--env` to pass variables on the CLI. I just like the cleaner way of using a file.
-- The `run.sh` script is ludicrously simple; feel free to adjust that to use some of the more advanced features of `vegeta`.
-- The URL is hardcoded; for this I apologize but I wasn't in the mood to muck w/ shell quoting today.
-- If you run from different locations (ie, a multi-client load test) you may want to adjsut the index that is used in the `run.sh` script a bit to prevent collisions.
+- The `env` file contains three variables, `THEURL` should be set to the URL of the api server being used for the test, including the port. Two additional variables, `THERATE` and `THEDURATION` can be used to adjust the number of api requests made per second and how long the test will last.
+- In addition to using the `env` file it is possible to pass variables into the load generator using `-e` or `--env`.
+- The `run.sh` script is very simple; feel free to adjust that to use some of the more advanced features of `vegeta`. - As it exists, the `run.sh` script tests using POSTs and GETs; the script can be modified and extended as required in order to perform the tests needed for your use case.
+- If you run from different locations (ie, a multi-client load test) you may want to adjust the index that is used in the `run.sh` script a bit to prevent key collisions.

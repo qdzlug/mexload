@@ -8,13 +8,15 @@ There are two main components to this test:
 1. An API server.
 2. A Load Generator.
 
-Both are provided as containers; the apiserver is provided as a compose file and the load generator is provided as a buildable docker image.
+Both of these components are provided as dockerfiles so that they can be deployed as containers.
+
+Additionally, the apiserver is provided with a docker-compose file and a helm chart for deployment.
 
 ## API Server
-This is located under the `apiserver` directory and is based off the [jsonplaceholder](https://github.com/typicode/jsonplaceholder) program. 
+This is located under the [`apiserver`](./apiserver/README.md) directory and is based off the [jsonplaceholder](https://github.com/typicode/jsonplaceholder) program.
 
 ## Load Generator
-This is located under the `loadgen` directory.
+This is located under the [`loadgen`](./loadgen/README.md) directory.
 
 # Usage
 This document assumes some familiarity with the MobiledgeX platform and how to deploy a docker-compose based application with a manifest. If you have questions see the [MobiledgeX Dev Center](https://developers.mobiledgex.com) for details.
