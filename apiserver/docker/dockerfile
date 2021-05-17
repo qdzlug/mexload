@@ -6,8 +6,9 @@ RUN mkdir /data
 # Install tools required for project
 ##RUN apt update
 
-RUN cd /data && git clone https://github.com/typicode/jsonplaceholder.git  
-RUN npm install /data/jsonplaceholder
+WORKDIR /data
+RUN git clone https://github.com/typicode/jsonplaceholder.git  
+RUN npm install jsonplaceholder
 COPY run.sh /data/run.sh
 RUN chmod 755 /data/run.sh
 
