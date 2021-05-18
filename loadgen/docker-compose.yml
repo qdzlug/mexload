@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  loadtest:
+    image: docker.mobiledgex.net/peterg-org/images/{image}:{VER}
+    environment:
+      - THEDURATION=60s
+      - THERATE=50
+      - THEURL=http://{cluster.cloudlet.operator}.mobiledgex.net:3000/posts
+    ports:
+      - "80:80"
+    entrypoint: ["/usr/local/bin/run.sh"]
+    restart: unless-stopped

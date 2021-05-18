@@ -74,3 +74,23 @@ Error Set:
 - In addition to using the `env` file it is possible to pass variables into the load generator using `-e` or `--env`.
 - The `run.sh` script is very simple; feel free to adjust that to use some of the more advanced features of `vegeta`. - As it exists, the `run.sh` script tests using POSTs and GETs; the script can be modified and extended as required in order to perform the tests needed for your use case.
 - If you run from different locations (ie, a multi-client load test) you may want to adjust the index that is used in the `run.sh` script a bit to prevent key collisions.
+
+## Run in MobidledgeX
+
+1. Build tag and push the image: 
+
+```
+IMAGE=myimagename
+VERSION=1.0
+ORG=myMexOrg
+docker image build -t ${IMAGE}:${VERSION} .
+docker login -u {username} docker.mobiledgex.net
+docker tag pgloadtest:1.4 docker.mobiledgex.net/${ORG}/images/${IMAGE}:${VERSION}
+docker push docker.mobiledgex.net/${ORG}/images/${IMAGE}:${VERSION}
+```
+
+2. Create an Docker App in MeX. Dont use Image Path, Instead use the `docker-compose.yml` file contents in the "Deployment Manifest", adjusted to match your iamge name and the URI of your api server.
+
+3. Create an Instance for the App.
+
+You can now easily adjust the `THERATE`, `THEDURATION` and even `THEURL` simple by editing the App and then upgarding the instance via the App Instances tab.
