@@ -2,3 +2,4 @@
 THEDURATION=60s
 # Connections per second
 THERATE=50
+THE_URL=http://{cluster.cloudlet.operator}.mobiledgex.net:3000/posts
